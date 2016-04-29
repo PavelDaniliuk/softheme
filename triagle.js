@@ -5,33 +5,34 @@ fs.readFile('Redirecting.txt', function (err, data) {
     var triagle = data.toString().split('\n');
     var newTriagle = triagle.slice(-triagle.length, -1).reverse();
 
-    var conversion = function (array) {
+    var conversionToTriagle = function (array) {
+        var triagle = [];
 
-        var result = [];
         for (i in array) {
-            result.push(array[i].split(' '))
+            triagle.push(array[i].split(' '))
         }
-        return result
+        return triagle
     };
 
-    var max = function (val1, val2) {
+    var maxValue = function (val1, val2) {
 
         return Math.max(Number(val1), Number(val2));
     };
 
     var maxSumm = function (matrix) {
-
         var result = [];
-        for (var i = 1; i < matrix.length; i++) {
+        var matrixLength = matrix.length;
+
+        for (var i = 1; i < matrixLength; i++) {
             for (var j = 0; j < matrix[i].length; j++) {
-                matrix[i][j] = Number(matrix[i][j]) + max(matrix[i - 1][j], matrix[i - 1][j + 1]);
+                matrix[i][j] = Number(matrix[i][j]) + maxValue(matrix[i - 1][j], matrix[i - 1][j + 1]);
                 result.push(matrix[i][j])
             }
         }
         return result.slice(-1)
     }
 
-    console.log(maxSumm(conversion(newTriagle))); // 7273
+    console.log(maxSumm(conversionToTriagle(newTriagle))); // 7273
 });
 
 
